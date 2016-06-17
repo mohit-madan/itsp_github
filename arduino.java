@@ -9,7 +9,7 @@ int acc_x_array[4];
 int acc_x_array_index=0;
 int acc_z_array[4];
 int acc_z_array_index=0;//declaring array and its variables
-boolean is_hello , is_yes , is_love ,is_you;
+boolean is_hello , is_yes , is_love ,is_you , is_like;
 int hello_yes_threshold_acc_x = /* !!!! type a threshold */ ,hello_yes_threshold_acc_y = /* !!!! */ ,you_threshold_acc_z = /* !!!! */ , you_threshold_acc_y = /* !!!! */ ;
 
 void setup(){
@@ -71,6 +71,10 @@ void loop(){
     is_love = true ;
   }
 
+  if(/* !!!! add flex sensor threshold for like*/) {
+    is_like = true ;
+  }
+
  
   
 //give outputs
@@ -97,6 +101,12 @@ void loop(){
   if(is_you) {
     Serial.println("you") ;
     tmrpcm.play("you.wav");
+    delay(1000);
+  }
+
+  if(is_like) {
+    Serial.println("like") ;
+    tmrpcm.play("like.wav");
     delay(1000);
   }
 
