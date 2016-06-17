@@ -5,9 +5,12 @@
 #include "SPI.h"
 TMRpcm tmrpcm;
 
-int hello_threshold_array[4];
-int hello_array_index=0;//declaring array and its variables
-boolean is_hello ;
+int acc_x_array[4];
+int acc_x_array_index=0;
+int acc_z_array[4];
+int acc_z_array_index=0;//declaring array and its variables
+boolean is_hello , is_yes , is_love;
+int hello_yes_threshold_acc_x = /* !!!! type a threshold */ ,hello_yes_threshold_acc_y = /* !!!! */ ,
 
 void setup(){
   Serial.begin(9600);
@@ -20,7 +23,7 @@ void setup(){
    }
 void loop(){
   int acc_x = analogRead(A0)-352 , acc_y=analogRead(A1)-352 , acc_z=analogRead(A2)-352 ;//creating accelerometer readings
-  int hello_threshold = /* !!!! type a threshold */ , hello_threshold_count=0 ;
+  int  hello_yes_threshold_acc_x_count=0 , yes_threshold_acc_x_count=0 ;
   int flex_thumb = analogRead(A3) , flex_index = analogRead(A4) , flex_middle = analogRead(A5) , flex_ring = analogRead(A6) , flex_pinky = analogRead(A7) ;//reading flex sensor values
   
   Serial.print("ax = ");
@@ -36,24 +39,50 @@ void loop(){
   Serial.println("\t");
   
   delay(50);
-  
-  hello_threshold_array[hello_array_index] = acc_x ;
-  hello_array_index = (hello_array_index+1)%4; // creating hello_threshold_array
+  //check hello and yes
+  acc_x_array[acc_x_array_index] = acc_x ;
+  acc_x_array_index = (acc_x_array_index+1)%4; 
+
+  acc_z_array[acc_x_array_index] = acc_x ;
+  acc_z_array_index = (acc_x_array_index+1)%4; // creating acc_x_array and acc_z_array
   
   for(int j=0 ; j<4 ; j++) {
-    if( /* !!!! add flex condition */ hello_threshold_array[j] > hello_threshold && acc_y > 65 ){
-      hello_threshold_count++ ;
-      if(x = 4) is_hello = true ;
+    if( acc_x_array[j] > hello_yes_threshold_acc_x && acc_y > hello_yes_threshold_acc_y ){
+      if(/*add flex sensor threshold for hello */) {
+        hello_yes_threshold_acc_x_count++ ;
+        if(hello_yes_threshold_acc_x_count = 4) is_hello = true ;
+      }
+      if(/*add flex sensor threshold for yes */) {
+        yes_threshold_acc_x_count++ ;
+        if(yes_threshold_acc_x_count = 4) is_yes = true ;
+      }
+
     }
-  }//check if the word is hello
+  }//check if the word is hello or yes
   
+  if(/* add flex sensor threshold for " i love you " */) {
+    is_love = true ;
+  }
+  
+//give outputs
   if(is_hello) {
+
     Serial.println("hello") ;
     tmrpcm.play("hello.wav");
     delay(1000);
   }// give hello output
+
+  if(is_yes) {
+
+    Serial.println("yes") ;
+    tmrpcm.play("yes.wav");
+    delay(1000);
+  }// give yes output
+
   
 }
+
+
 
 
 
