@@ -10,7 +10,7 @@ int acc_x_array_index=0;
 int acc_z_array[4];
 int acc_z_array_index=0;//declaring array and its variables
 boolean is_hello , is_yes , is_love ,is_you , is_like;
-int hello_yes_threshold_acc_x = /* !!!! type a threshold */ ,hello_yes_threshold_acc_y = /* !!!! */ ,you_threshold_acc_z = /* !!!! */ , you_threshold_acc_y = /* !!!! */ ;
+int hello_yes_threshold_acc_x = /* !!!! type a threshold */ , hello_yes_threshold_acc_y = /* !!!! */ , you_threshold_acc_z = /* !!!! */ , you_threshold_acc_y = /* !!!! */ ;
 
 void setup(){
   Serial.begin(9600);
@@ -21,10 +21,11 @@ void setup(){
     Serial.println("SD fail");
     return;
    }
+  } 
 void loop(){
-  int acc_x = analogRead(A0)-352 , acc_y=analogRead(A1)-352 , acc_z=analogRead(A2)-352 ;//creating accelerometer readings
+  int acc_x = analogRead(A5)-352 , acc_y=analogRead(A6)-352 , acc_z=analogRead(A7)-352 ;//creating accelerometer readings
   int  hello_threshold_acc_x_count=0 , yes_threshold_acc_x_count=0 ,you_threshold_acc_z_count=0 ;
-  int flex_thumb = analogRead(A3) , flex_index = analogRead(A4) , flex_middle = analogRead(A5) , flex_ring = analogRead(A6) , flex_pinky = analogRead(A7) ;//reading flex sensor values
+  int flex_thumb = analogRead(A0) , flex_index = analogRead(A1) , flex_middle = analogRead(A2) , flex_ring = analogRead(A3) , flex_pinky = analogRead(A4) ;//reading flex sensor values
   
   Serial.print("ax = ");
   Serial.print(acc_x);
@@ -37,7 +38,28 @@ void loop(){
   Serial.print("az = ");
   Serial.print(acc_z);
   Serial.println("\t");
-  
+  Serial.print("\n")
+
+  Serial.print("thumb = ");
+  Serial.print(flex_thumb);
+  Serial.print("\t");
+
+  Serial.print("index = ");
+  Serial.print(flex_index);
+  Serial.print("\t");
+
+  Serial.print("middle = ");
+  Serial.print(flex_middle);
+  Serial.print("\t");
+
+  Serial.print("ring = ");
+  Serial.print(flex_ring);
+  Serial.print("\t");
+
+  Serial.print("pinky = ");
+  Serial.print(flex_pinky);
+  Serial.println("\t");
+  Serial.print("\n")
   delay(50);
   //check hello and yes
   acc_x_array[acc_x_array_index] = acc_x ;
