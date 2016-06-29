@@ -10,7 +10,7 @@ int acc_x_array_index=0;
 int acc_z_array[4];
 int acc_z_array_index=0;//declaring array and its variables
 boolean is_hello , is_yes , is_love ,is_you , is_like;
-int hello_yes_threshold_acc_x = /* !!!! type a threshold */ , hello_yes_threshold_acc_y = /* !!!! */ , you_threshold_acc_z = /* !!!! */ , you_threshold_acc_y = /* !!!! */ ;
+int hello_yes_threshold_acc_x = 0/* !!!! type a threshold */ , hello_yes_threshold_acc_y = 0/* !!!! */ , you_threshold_acc_z = 0/* !!!! */ , you_threshold_acc_y = 0/* !!!! */ ;
 
 void setup(){
   Serial.begin(9600);
@@ -25,7 +25,7 @@ void setup(){
 void loop(){
   int acc_x = analogRead(A5)-352 , acc_y=analogRead(A6)-352 , acc_z=analogRead(A7)-352 ;//creating accelerometer readings
   int  hello_threshold_acc_x_count=0 , yes_threshold_acc_x_count=0 ,you_threshold_acc_z_count=0 ;
-  int flex_thumb = analogRead(A0) , flex_index = analogRead(A1) , flex_middle = analogRead(A2) , flex_ring = analogRead(A3) , flex_pinky = analogRead(A4) ;//reading flex sensor values
+  int flex_thumb = analogRead(A0)-760 , flex_index = analogRead(A1)-720 , flex_middle = analogRead(A2)-697 , flex_ring = analogRead(A3)-770 , flex_pinky = analogRead(A4)-790 ;//reading flex sensor values
   
   Serial.print("ax = ");
   Serial.print(acc_x);
@@ -83,17 +83,17 @@ void loop(){
   }
 //check for you 
   for(int j=0 ; j<4 ; j++) {
-    if(/* !!!! add flex sensor threshold for hello */ acc_z_array[j] > you_threshold_acc_z && acc_y > you_threshold_acc_y ){
+    if(false &&/* !!!! add flex sensor threshold for hello */ acc_z_array[j] > you_threshold_acc_z && acc_y > you_threshold_acc_y ){
       you_threshold_acc_z_count++ ;
       if(you_threshold_acc_z_count = 4) is_you = true ;
     }
   
   //check for "i love you"
-  if(/* !!!! add flex sensor threshold for " i love you " */) {
+  if(false/* !!!! add flex sensor threshold for " i love you " */) {
     is_love = true ;
   }
 
-  if(/* !!!! add flex sensor threshold for like*/) {
+  if(false/* !!!! add flex sensor threshold for like*/) {
     is_like = true ;
   }
 
